@@ -12,7 +12,6 @@ def find_name_of_first_day_inYear(year):
     list_ = [1, (13*11-1)/5 , last_two_digits_of_yera , last_two_digits_of_yera/4 ,
             first_two_digits_of_yera/4 , -2*first_two_digits_of_yera]
     day_num = int((sum(list_))) // 1
-    print(day_num)
 
     if day_num < 0 :
         first_day_num = day_num
@@ -24,4 +23,14 @@ def find_name_of_first_day_inYear(year):
             day_num = day_num + first_day_num
     return day_num % 7 
 
-print(find_name_of_first_day_inYear(2019))
+def draw_first_month(first_day):
+    print("    january    ")
+    print("sa su mo tu we th fr ")
+    days_list = " sa su mo tu we th fr "
+    index_first_day = (first_day-1) * '   ' + '1'
+    find_index_1st = index_first_day.find('1')
+    find_index_last = index_first_day.find('r')
+    print(find_index_1st*' ' + '1')
+
+
+draw_first_month(find_name_of_first_day_inYear(2019))
