@@ -1,0 +1,117 @@
+dict_number = {'0':'zero','1':'one','2':'two','3':'three','4':'four','5':'five','6':'six','7':'seven','8':'eight','9':'nine','10':'ten','11':'eleven','12':'twelve','13':'thirteen','14':'fourteen','15':'fivteen','16':'sixteen',
+			   '17':'seventeen','18':'eighteen','19':'ninteen','20':'twenty','30':'thirty','40':'fourty','50':'fifty','60':'sixty','70':'seventy','80':'eighty','90':'ninty','100':'hundred'}
+num_len = {4:'thousands',5:'thousands',6:'thousands',7:'million',8:'million',9:'million',10:'billion',11:'billion',12:'billion',13:'Cillion',14:'Cillion',15:'Cillion',16:'Dillion',17:'Dillion',18:'Dillion',19:'Eillion',21:'Fillion',24:'Gillion'}
+number = input('put your num:   ')
+
+def split_num(numStr):
+	
+	if '.' in numStr:
+		num_list = numStr.split('.')
+	elif ',' in numStr:
+		num_list = numStr.split(',')
+	else:
+		num_list = [numStr]
+	return num_list
+
+def split_every_three_num(num_list):
+	left_side = num_list[0][::-1]
+
+	if len(left_side)%3 == 0:
+		range_parameter = len(left_side)//3
+	else:
+		range_parameter =  len(left_side)//3 + 1
+	spliting_list = []
+	
+	for i in range(range_parameter):
+		index = left_side[3*i:3*i+3][::-1]
+		spliting_list.append(index)
+	return spliting_list
+
+def read_nums(last_list):
+	last_list = last_list[::-1]
+	read_num_list = []
+	
+	for index in last_list:
+		if index in dict_number:
+			if index == '0':
+				continue
+			else:
+				read_num = '{}'.format(dict_number[index])
+				read_num_list.append(read_num)
+				continue 
+		
+		else:
+			if index == '00':
+				continue
+				
+			elif index[0] == '0':
+				if index[1] == '0':
+					if index[2] == '0':
+						continue 
+					else:
+						new_str_num = index[2:]
+						read_num = '{}'.format(dict_number[new_str_num])
+						read_num_list.append(read_num)
+				else:
+					new_str_num = index[1:]
+					if new_str_num in dict_number:
+						read_num = '{}'.format(dict_number[new_str_num])
+						read_num_list.append(read_num)
+					else:
+						first_new_str_num=new_str_num[0]+'0'
+						read_num = '{} {}'.format(dict_number[first_new_str_num],dict_number[new_str_num[1]])
+						read_num_list.append(read_num)
+						
+			else:
+				if index[1] == '0':
+					read_num = '{} hundred and {} '.format(dict_number[index[0]] ,dict_number[index[2]])
+					read_num_list.append(read_num)
+				else:
+					new_str_num = index[1:]
+					if new_str_num in dict_number:
+						if len(index)==3:
+							read_num = '{} hundred and {}'.format(dict_number[index[0]],dict_number[index[1]+index[2]])
+							read_num_list.append(read_num)
+						else:
+							new_str_num = index[0]+'0'
+							read_num = '{} {}'.format(dict_number[new_str_num],dict_number[index[-1]])
+							read_num_list.append(read_num)
+					else:
+						first_new_str_num = new_str_num[0]+'0'
+						read_num = '{} hundred and {} {}'.format(dict_number[index[0]],dict_number[first_new_str_num],dict_number[index[2]])
+						read_num_list.append(read_num)
+	return read_num_list
+
+
+	
+print(read_nums(split_every_three_num(split_num(number))))
+		
+	
+	
+		
+			
+			
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+			
+			   
